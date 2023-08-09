@@ -231,7 +231,7 @@ class BinarySearchTree {
             return this;
         }
         let current = this.root;
-        while (current != null) {
+        while (current) {
             if (newVal < current.data) {
                 if (current.left == null) {
                     current.left = new BSTNode(newVal);
@@ -259,7 +259,24 @@ class BinarySearchTree {
    * @returns {BinarySearchTree} This tree.
    */
     insertRecursive(newVal, curr = this.root) {
-        
+        if (this.isEmpty()){
+            this.root = new BSTNode(newVal)
+            return this;
+        }
+        if (newVal < curr.data){
+            if (curr.left == null){
+                curr.left = new BSTNode(newVal);
+                return this;
+            }
+            return this.insertRecursive(newVal, curr.left);
+        }
+        if (newVal > curr.data) {
+            if (curr.right == null){
+                curr.right = new BSTNode(newVal);
+                return this;
+            }
+            return this.insertRecursive(newVal, curr.right);
+        }
     }
 
 
