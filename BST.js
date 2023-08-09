@@ -48,7 +48,7 @@ class BinarySearchTree {
         // if (this.root == null) {
         //     return null;
         // }
-        return this.root === null ? true : false; //if there is no value at root, that means there are no children
+        return this.root === null; // ? true : false; //if there is no value at root, that means there are no children
     }
 
     /**
@@ -217,6 +217,52 @@ class BinarySearchTree {
         return `The range for this binary tree is ${min}-${max}.`
     }
 
+    /**
+   * Inserts a new node with the given newVal in the right place to preserve
+   * the order of this tree.
+   * - Time: O(?).
+   * - Space: O(?).
+   * @param {number} newVal The data to be added to a new node.
+   * @returns {BinarySearchTree} This tree.
+   */
+    insert(newVal) {
+        if (this.isEmpty()) {
+            this.root = new BSTNode(newVal);
+            return this;
+        }
+        let current = this.root;
+        while (current != null) {
+            if (newVal < current.data) {
+                if (current.left == null) {
+                    current.left = new BSTNode(newVal);
+                    return this;
+                }
+                current = current.left;
+            } else {
+                if (current.right == null) {
+                    current.right = new BSTNode(newVal);
+                    return this;
+                }
+                current = current.right;
+            }
+        }
+    }
+
+    /**
+   * Inserts a new node with the given newVal in the right place to preserve
+   * the order of this tree.
+   * - Time: O(?).
+   * - Space: O(?).
+   * @param {number} newVal The data to be added to a new node.
+   * @param {Node} curr The node that is currently accessed from the tree as
+   *    the tree is being traversed.
+   * @returns {BinarySearchTree} This tree.
+   */
+    insertRecursive(newVal, curr = this.root) {
+        
+    }
+
+
 
     // Logs this tree horizontally with the root on the left.
     print(node = this.root, spaceCnt = 0, spaceIncr = 10) {
@@ -308,6 +354,10 @@ console.log("-----------------");
 console.log("Range");
 console.log(threeLevelTree.range());
 console.log("-----------------");
+console.log("Insert");
+threeLevelTree.insert(7);
+threeLevelTree.print();
+
 
 /* fullTree
                       root
@@ -320,20 +370,21 @@ console.log("-----------------");
       4    12  18  24  31  44 66  90
   */
   /***************** Uncomment after insert method is created. ****************/
-  // const fullTree = new BinarySearchTree();
-  // fullTree
-  //   .insert(25)
-  //   .insert(15)
-  //   .insert(10)
-  //   .insert(22)
-  //   .insert(4)
-  //   .insert(12)
-  //   .insert(18)
-  //   .insert(24)
-  //   .insert(50)
-  //   .insert(35)
-  //   .insert(70)
-  //   .insert(31)
-  //   .insert(44)
-  //   .insert(66)
-  //   .insert(90);
+const fullTree = new BinarySearchTree();
+fullTree
+    .insert(25)
+    .insert(15)
+    .insert(10)
+    .insert(22)
+    .insert(4)
+    .insert(12)
+    .insert(18)
+    .insert(24)
+    .insert(50)
+    .insert(35)
+    .insert(70)
+    .insert(31)
+    .insert(44)
+    .insert(66)
+    .insert(90);
+fullTree.print();
