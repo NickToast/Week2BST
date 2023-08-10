@@ -279,6 +279,71 @@ class BinarySearchTree {
         }
     }
 
+    /**
+   * DFS Preorder: (CurrNode, Left, Right)
+   * Converts this BST into an array following Depth First Search preorder.
+   * Example on the fullTree var:
+   * [25, 15, 10, 4, 12, 22, 18, 24, 50, 35, 31, 44, 70, 66, 90]
+   * @param {Node} node The current node during the traversal of this tree.
+   * @param {Array<number>} vals The data that has been visited so far.
+   * @returns {Array<number>} The vals in DFS Preorder once all nodes visited.
+   */
+    toArrPreorder(node = this.root, vals = []) {
+        if (node === null) {
+            return vals;
+        }
+        if (node) {
+            vals.push(node.data);
+            this.toArrPreorder(node.left, vals);
+            this.toArrPreorder(node.right, vals);
+        }
+        return vals;
+    }
+
+    /**
+   * DFS Inorder: (Left, CurrNode, Right)
+   * Converts this BST into an array following Depth First Search inorder.
+   * See debugger call stack to help understand the recursion.
+   * Example on the fullTree var:
+   * [4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90]
+   * @param {Node} node The current node during the traversal of this tree.
+   * @param {Array<number>} vals The data that has been visited so far.
+   * @returns {Array<number>} The vals in DFS Preorder once all nodes visited.
+   */
+    toArrInorder(node = this.root, vals = []) {
+        if (node === null) {
+            return vals;
+        }
+        if (node) {
+            this.toArrInorder(node.left, vals);
+            vals.push(node.data);
+            this.toArrInorder(node.right, vals);
+        }
+        return vals;
+    }
+
+    /**
+   * DFS Postorder (Left, Right, CurrNode)
+   * Converts this BST into an array following Depth First Search postorder.
+   * Example on the fullTree var:
+   * [4, 12, 10, 18, 24, 22, 15, 31, 44, 35, 66, 90, 70, 50, 25]
+   * @param {Node} node The current node during the traversal of this tree.
+   * @param {Array<number>} vals The data that has been visited so far.
+   * @returns {Array<number>} The vals in DFS Preorder once all nodes visited.
+   */
+    toArrPostorder(node = this.root, vals = []) {
+        if (node === null) {
+            return vals;
+        }
+        if (node) {
+            this.toArrPostorder(node.left, vals);
+            this.toArrPostorder(node.right, vals);
+            vals.push(node.data);
+        }
+        return vals;
+    }
+
+
 
 
     // Logs this tree horizontally with the root on the left.
@@ -374,6 +439,16 @@ console.log("-----------------");
 console.log("Insert");
 threeLevelTree.insert(7);
 threeLevelTree.print();
+console.log("ToArrPreorder");
+threeLevelTree.print();
+console.log(threeLevelTree.toArrPreorder());
+console.log("-----------------");
+console.log("ToArrInorder");
+console.log(threeLevelTree.toArrInorder());
+console.log("-----------------");
+console.log("ToArrPostorder");
+console.log(threeLevelTree.toArrPostorder());
+console.log("-----------------");
 
 
 /* fullTree
@@ -387,21 +462,21 @@ threeLevelTree.print();
       4    12  18  24  31  44 66  90
   */
   /***************** Uncomment after insert method is created. ****************/
-const fullTree = new BinarySearchTree();
-fullTree
-    .insert(25)
-    .insert(15)
-    .insert(10)
-    .insert(22)
-    .insert(4)
-    .insert(12)
-    .insert(18)
-    .insert(24)
-    .insert(50)
-    .insert(35)
-    .insert(70)
-    .insert(31)
-    .insert(44)
-    .insert(66)
-    .insert(90);
-fullTree.print();
+// const fullTree = new BinarySearchTree();
+// fullTree
+//     .insert(25)
+//     .insert(15)
+//     .insert(10)
+//     .insert(22)
+//     .insert(4)
+//     .insert(12)
+//     .insert(18)
+//     .insert(24)
+//     .insert(50)
+//     .insert(35)
+//     .insert(70)
+//     .insert(31)
+//     .insert(44)
+//     .insert(66)
+//     .insert(90);
+// fullTree.print();
