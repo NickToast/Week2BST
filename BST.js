@@ -343,7 +343,118 @@ class BinarySearchTree {
         return vals;
     }
 
+    /**
+   * BFS order: horizontal rows top-down left-to-right.
+   * Converts this BST into an array following Breadth First Search order.
+   * Example on the fullTree var:
+   * [25, 15, 50, 10, 22, 35, 70, 4, 12, 18, 24, 31, 44, 66, 90]
+   * @param {Node} current The current node during the traversal of this tree.
+   * @returns {Array<number>} The data of all nodes in BFS order.
+   */
+    toArrLevelorder(current = this.root) {
+        if (current === null) {
+            return [];
+        }
+        // let queue = [current];
+        // let result = [];
 
+        // while (queue.length) {
+        //     let levelArray = [];
+        //     let levelSize = queue.length;
+        //     while (levelSize) {
+        //         let current = queue.shift();
+        //         if (current.left) queue.push(current.left);
+        //         if (current.right) queue.push(current.right);
+
+        //         levelArray.push(current.data);
+        //         levelSize--;
+        //     }
+        //     result.push(levelArray);
+        // }
+        // return result;
+
+        //RUBEN SOLUTION
+        let vals = [];
+        let newVals = [];
+        if (current) {
+            newVals.push(current);
+        }
+        while (newVals.length > 0) {
+            let whileVals = newVals.shift();
+            vals.push(whileVals.data);
+            if (whileVals.left) {
+                newVals.push(whileVals.left);
+            }
+            if (whileVals.right) {
+                newVals.push(whileVals.right);
+            }
+            
+        }
+        return vals;
+    }
+
+    /**
+   * Recursively counts the total number of nodes in this tree.
+   * - Time: O(?).
+   * - Space: O(?).
+   * @param {Node} node The current node during the traversal of this tree.
+   * @returns {number} The total number of nodes.
+   */
+    size(node = this.root) {
+        if (node === null) {
+            return 0;
+        }
+        if (node) {
+            return 1 + this.size(node.left) + this.size(node.right);
+        }
+    }
+
+    /**
+   * Calculates the height of the tree which is based on how many nodes from
+   * top to bottom (whichever side is taller).
+   * - Time: O(?).
+   * - Space: O(?).
+   * @param {Node} node The current node during traversal of this tree.
+   * @returns {number} The height of the tree.
+   */
+    height(node = this.root) {
+        if (node === null) {
+            return 0;
+        }
+        if (node) {
+            let leftHeight = this.height(node.left);
+            let rightHeight = this.height(node.right);
+            if (leftHeight > rightHeight) {
+                return 1 + leftHeight;
+            } else {
+                return 1 + rightHeight;
+            }
+        }
+
+        //RUBEN SOLUTION
+        // return 1 + Math.max(this.height(node.left), this.height(node.right));
+    }
+
+    /**
+   * Determines if this tree is a full tree. A full tree is a tree where every
+   * node has both a left and a right except for the leaf nodes (last nodes)
+   * - Time: O(?).
+   * - Space: O(?).
+   * @param {Node} node The current node during traversal of this tree.
+   * @returns {boolean} Indicates if this tree is full.
+   */
+    isFull(node = this.root) {
+        if (node === null) {
+            return false;
+        }
+        if (!node.left && !node.right) {
+            return true;
+        }
+        if (node.left && node.right) {
+            return this.isFull(node.left) && this.isFull(node.right);
+        }
+        return false;
+    }
 
 
     // Logs this tree horizontally with the root on the left.
@@ -448,6 +559,15 @@ console.log(threeLevelTree.toArrInorder());
 console.log("-----------------");
 console.log("ToArrPostorder");
 console.log(threeLevelTree.toArrPostorder());
+console.log("-----------------");
+console.log("ToArrLevelorder");
+console.log(threeLevelTree.toArrLevelorder());
+console.log("-----------------");
+console.log("Size");
+console.log(threeLevelTree.size());
+console.log("-----------------");
+console.log("Height");
+console.log(threeLevelTree.height());
 console.log("-----------------");
 
 
